@@ -84,7 +84,52 @@ public class Tester {
 		
 		System.out.println(RED+"*********Sort the employees by salary in descending order.******"+RESET);
 		list.stream().sorted(Comparator.comparing(Employee::getAge).reversed()).forEach(System.out::println);
+		
+		//13. Find Oldest Employee:
+		System.out.println(RED+"*********Find the oldest employee.*********"+RESET);
+		int orElseThrow2 = list.stream().mapToInt(Employee::getAge).max().orElseThrow();
+		Employee employee = list.stream().max((e1,e2)->(e1.getAge()-e2.getAge())).get();
+	System.out.println(employee);
+	System.out.println("Max Age : "+orElseThrow2);
 	
+	//14. Group Employees by Age:
+//    - Group employees into age groups (e.g., 20-30, 31-40, etc.)
+	
+	//  and return a map with age group as the key and a list of employees as the value.
+	System.out.println(RED+"****Group employees into age groups (e.g., 20-30, 31-40, etc.)*****"+RESET);
+list.stream().collect(Collectors.groupingBy((t)-> 
+{int age= t.getAge();
+if(age>=20&& age<=30)
+	return "20-30";
+else if(age >=31 && age<=40)
+	return "31-40";
+else 
+	return "40+";
+
+})).forEach((key,value)->System.out.println(key+"-"+value));
+
+
+//15. Find Employees with a Specific Age:
+//    - Find all employees who are exactly 35 years old.
+System.out.println(RED+"************ Find all employees who are exactly 35 years old.***********"+RESET);
+	
+
+list.stream().filter(k->k.getAge()==35).forEach(System.out::println);
+
+//16. Calculate the Sum of Salaries by Gender:
+//- Calculate the sum of salaries for each gender (i.e., male and female)
+//and return a map with gender as the key and the sum of salaries as the value.
+System.out.println(RED+"********* Calculate the sum of salaries for each gender**********"+RESET);
+
+list.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.summingDouble(Employee::getSalary)))
+.forEach((key,value)->System.out.println(key+""+value));
+
+//17. Find Employees with Names Starting with "J":
+//- Find all employees whose names start with the letter "E."
+System.out.println(RED+"*********Find all employees whose names start with the letter J******"+RESET);
+
+list.stream().filter(k->k.getName().startsWith("E")).forEach(System.out::println);
+
 	}
 	
 
