@@ -130,6 +130,41 @@ System.out.println(RED+"*********Find all employees whose names start with the l
 
 list.stream().filter(k->k.getName().startsWith("E")).forEach(System.out::println);
 
+
+//18. Calculate the Average Salary for Male and Female Employees:
+//    - Calculate the average salary separately for male
+//    and female employees and return a map with gender
+//    		as the key and the average salary as the value.
+System.out.println(RED+"**********Calculate the average salary separately for male and female*********"+RESET);
+list.stream().collect(Collectors.groupingBy(Employee::getGender,Collectors.averagingDouble(Employee::getSalary))).forEach((key,value)-> System.out.println(key+""+value));
+
+//19. Find the Top N Highest Paid Employees:
+//- Find the top N employees with the highest salaries.
+
+System.out.println(RED+"*******Find the top N employees with the highest salaries.********"+RESET);
+list.stream().sorted((o1,o2) -> (int)(o1.getSalary())).limit(5).forEach(System.out::println);
+list.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).limit(3).forEach(System.out::println);
+
+
+//20. Retrieve Distinct Age Values:
+//- Get a list of distinct ages of all employees.
+System.out.println(RED+"*********Get a list of distinct ages of all employees.*********"+RESET);
+list.stream().filter(k-> !set.add(k.getAge())).forEach(System.out::println);
+
+//21. Find the Three Lowest-Paid Employees:
+//- Find and display the names of the three employees with the lowest salaries.
+System.out.println(RED+"*******Find and display the names of the three employees with the lowest salaries.********"+RESET);
+
+list.stream().sorted((o1,o2)->(int)(o1.getSalary()-o2.getSalary())).map(k->k.getName()).limit(3).forEach(System.out::println);
+
+
+
+
+
+
+
+
+
 	}
 	
 
