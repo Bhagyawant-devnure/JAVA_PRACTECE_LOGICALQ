@@ -6,10 +6,10 @@ class Father{
 	
 }
 class Son extends Father{
-	protected double balance= 18000;
+	protected double balance= 18000;// variable hiding
 	public void showBalance() {
-		System.out.println("son balance is :"+this.balance);
-		System.out.println("father balance is :"+super.balance);
+		System.out.println("son balance is :"+this.balance);//18000
+		System.out.println("father balance is :"+super.balance);//50000
 		
 	}
 }
