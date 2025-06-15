@@ -157,12 +157,36 @@ System.out.println(RED+"*******Find and display the names of the three employees
 
 list.stream().sorted((o1,o2)->(int)(o1.getSalary()-o2.getSalary())).map(k->k.getName()).limit(3).forEach(System.out::println);
 
+////		22. Sort Employees by Name Length:
+//- Sort employees by the length of their names (shortest to longest).
+System.out.println(RED+"***********Sort employees by the length of their names (shortest to longest).*******"+RESET);
 
+list.stream().sorted((o1,o2)-> (o1.getName().length()- o2.getName().length())).forEach(System.out::println);
 
+//23. Group Employees by Age Range:
+//- Group employees into custom
+//age ranges (e.g., 20-29, 30-39, etc.) and
+//return a map with the age range as the key and a list of employees as the value.
+System.out.println(RED+"*********Group employees into custom age ranges (e.g., 20-29, 30-39, etc.)*********"+RESET);
 
+list.stream().collect(Collectors.groupingBy((t)->{
+	int age=(t).getAge();
+	if(age >=20 && age<29)
+		return "20-29";
+	else if(age>=30 && age<= 39)
+		return "30-39";
+	else
+		return"40";
+})).forEach((key,value)->System.out.println(key+""+value));
 
+//24. Find the Average Salary of Employees Aged 30 or Younger:
+//- Calculate the average salary of employees aged 30 or younger.
 
+System.out.println(RED+"********Calculate the average salary of employees aged 30 or younger.******"+RESET);
 
+double orElseThrow3= list.stream().filter(emp->emp.getAge()<=30).mapToDouble(k->k.getSalary()).average().orElseThrow();
+
+System.out.println(orElseThrow3);
 
 
 	}
